@@ -1,7 +1,7 @@
 <template>
   <div class="container" @click="navigate">
     <div class="fixPos">
-      <image :src="iconUrl" class="icon"></image>
+      <img :src="iconUrl" class="icon">
     </div>
     <div class="title fixPos">{{ title }}</div>
   </div>
@@ -42,17 +42,17 @@ export default {
 
 <style>
 .container {
-		height: 50rpx;
+		height: 50px;
 		border: 1px solid transparent;
 		text-decoration: none;
 		color: rgb(255, 255, 255);
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
-		border-radius: 20rpx;
-		margin-top: 20rpx;
-		/* margin-left: 50rpx;
-		margin-right: 50rpx; */
+		border-radius: 20px;
+		margin-top: 20px;
+		/* margin-left: 50px;
+		margin-right: 50px; */
 	}
 
 	.container:hover {
@@ -66,8 +66,8 @@ export default {
 
 	.fixPos {
 		position: relative;
-		top: 10rpx;
-		margin-left: 10rpx;
-		margin-right: 10rpx;
+		top: 10px;
+		margin-left: 10px;
+		margin-right: 10px;
 	}
 </style>

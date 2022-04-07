@@ -2,19 +2,19 @@
 <template>
   <div class="content" v-if="reloadFlag">
     <div>
-      <image
+      <img
         src="../../static/logo.png"
         class="logo"
         v-if="status"
         @click="changeStatus"
-      ></image>
+      >
       <div v-if="!status">
         <div>
-          <image
+          <img
             src="../../static/long.png"
             class="long"
             @click="changeStatus()"
-          ></image>
+          >
         </div>
         <div> 喔唷，崩溃啦！ </div>
         <div @click="toUpload"> 显示 你妈 时出了些问题。 </div>
@@ -43,7 +43,7 @@
       
       <urlItem v-for="content in sites" v-bind:content="content" v-bind:key="content.url"></urlItem>
       <!-- <div class="nav-panel-item" title="Bilibili" href="https://www.bilibili.com/" target="_blank">
-			        <image src="https://www.bilibili.com/favicon.ico" alt="Bilibili" height="16" width="16" class="nav-panel-item-img">
+			        <img src="https://www.bilibili.com/favicon.ico" alt="Bilibili" height="16" width="16" class="nav-panel-item-img">
 			        <div class="nav-panel-item-txt">Bilibili</div>
 			    </div> -->
       <addPage></addPage>
@@ -137,13 +137,13 @@ export default {
 	}
 
 	.long {
-		width: 100rpx;
-		height: 100rpx;
+		width: 100px;
+		height: 100px;
 	}
 
 	.buttonBox {
-		margin-top: 20rpx;
-		margin-bottom: 40rpx;
+		margin-top: 20px;
+		margin-bottom: 40px;
 	}
 
 	.content {
@@ -246,7 +246,7 @@ export default {
 		backdrop-filter: blur(6px);
 		opacity: 0.6;
 		align-content: flex-start;
-		margin-top: 20rpx;
+		margin-top: 20px;
 		/* margin-bottom: 100px; */
 		width: 80%;
 		min-height: 300px;
@@ -261,7 +261,7 @@ export default {
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: flex-start;
-		gap: 10rpx;
+		gap: 10px;
 		/* box-shadow: 2px 5px 5px 5px rgba(0, 0, 0, 0.1); */
 	}
 </style>
