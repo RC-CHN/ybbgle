@@ -42,32 +42,32 @@ export default {
 
 <style>
 .container {
-  height: 50rpx;
-  border: 1px solid transparent;
-  text-decoration: none;
-  color: #515151;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  border-radius: 20rpx;
-  margin-top: 20rpx;
-  /* margin-left: 50rpx;
+		height: 50rpx;
+		border: 1px solid transparent;
+		text-decoration: none;
+		color: rgb(255, 255, 255);
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		border-radius: 20rpx;
+		margin-top: 20rpx;
+		/* margin-left: 50rpx;
 		margin-right: 50rpx; */
-}
+	}
 
-.container:hover {
-  background-color: #c0c0c0;
-}
+	.container:hover {
+		background-color: rgb(91, 91, 99);
+	}
 
-.icon {
-  height: 20px;
-  width: 20px;
-}
+	.icon {
+		height: 20px;
+		width: 20px;
+	}
 
-.fixPos {
-  position: relative;
-  top: 10rpx;
-  margin-left: 10rpx;
-  margin-right: 10rpx;
-}
+	.fixPos {
+		position: relative;
+		top: 10rpx;
+		margin-left: 10rpx;
+		margin-right: 10rpx;
+	}
 </style>
