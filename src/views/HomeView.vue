@@ -46,7 +46,7 @@
 			        <img src="https://www.bilibili.com/favicon.ico" alt="Bilibili" height="16" width="16" class="nav-panel-item-img">
 			        <div class="nav-panel-item-txt">Bilibili</div>
 			    </div> -->
-      <addPage></addPage>
+      <!-- <addPage></addPage> -->
     </div>
   </div>
 </template>
@@ -130,20 +130,20 @@ export default {
 <style>
 	page {
 		background-color: #ffffff;
-		
+		background-image: url(../../static/bg.svg);
 		background-repeat: no-repeat;
 		background-position: bottom;
 		height: 100%;
 	}
 
 	.long {
-		width: 100px;
-		height: 100px;
+		width: 100rpx;
+		height: 100rpx;
 	}
 
 	.buttonBox {
-		margin-top: 20px;
-		margin-bottom: 40px;
+		margin-top: 20rpx;
+		margin-bottom: 40rpx;
 	}
 
 	.content {
@@ -246,7 +246,7 @@ export default {
 		backdrop-filter: blur(6px);
 		opacity: 0.6;
 		align-content: flex-start;
-		margin-top: 20px;
+		margin-top: 20rpx;
 		/* margin-bottom: 100px; */
 		width: 80%;
 		min-height: 300px;
@@ -261,7 +261,7 @@ export default {
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: flex-start;
-		gap: 10px;
+		gap: 10rpx;
 		/* box-shadow: 2px 5px 5px 5px rgba(0, 0, 0, 0.1); */
 	}
 </style>

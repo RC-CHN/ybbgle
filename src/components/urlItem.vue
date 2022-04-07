@@ -42,32 +42,46 @@ export default {
 
 <style>
 .container {
-		height: 50px;
+		width: 100px;
+		height: 100px;
+		/* max-height: 40px; */
 		border: 1px solid transparent;
 		text-decoration: none;
-		color: rgb(255, 255, 255);
+		color: #515151;
+		background-color: #FFFFFF;
+		opacity: 0.8;
 		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
 		border-radius: 20px;
-		margin-top: 20px;
-		/* margin-left: 50px;
-		margin-right: 50px; */
+		margin-top: 10px;
+		box-shadow: 2px 5px 5px 5px rgba(0, 0, 0, 0.1);
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	.title {
+		font-size: 10px;
+		white-space: nowrap;
+
 	}
 
 	.container:hover {
-		background-color: rgb(91, 91, 99);
+		background-color: #C0C0C0;
 	}
 
 	.icon {
-		height: 20px;
-		width: 20px;
+		height: 50px;
+		width: 50px;
+		transform: translate(0px, 0px);
 	}
 
 	.fixPos {
-		position: relative;
-		top: 10px;
-		margin-left: 10px;
-		margin-right: 10px;
+		/* position: relative;
+		top: 10rpx;
+		margin-left: 10rpx;
+		margin-right: 10rpx;
+		transform: translateY(-10px); */
 	}
 </style>
