@@ -82,6 +82,11 @@ export default {
       _that.$data.sites = res.data;
       _that.$data.reloadFlag = true;
     });
+	document.addEventListener("keydown",function(e){
+		if(e.keyCode == 13){
+			_that.searchBing()
+		}
+	})
     // uni.request({
     //   url: "http://m.rcfortress.site:7899/navi/getSiteList",
     //   method: "GET",
