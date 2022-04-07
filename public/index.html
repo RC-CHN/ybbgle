@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      body{
+        margin: 0;
+      }
+    </style>
   </head>
   <body>
     <noscript>
@@ -18,12 +23,12 @@
     #app{
       background: url("./bg.svg");
       background-repeat: no-repeat;
-      width: 120%;
-      text-align: center;
-      align-items: center;
-      transform: translateX(-10%);
+      width: 100%;
+      /* text-align: center;
+      align-items: center; */
+      /* transform: translateX(-10%); */
       height: 100%;
-      background-size: 100% 100%;
+      background-size: 120% 100%;
       position: fixed;
       background-position: -20px 300px;
     }
