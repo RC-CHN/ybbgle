@@ -157,7 +157,7 @@ export default {
 	.logo {
 		width: 280px;
 		height: 100px;
-		margin-top: 70px;
+		margin-top: 20px;
 	}
 
 	.search-bar {
@@ -246,8 +246,8 @@ export default {
 		backdrop-filter: blur(6px);
 		opacity: 0.6;
 		align-content: flex-start;
-		margin-top: 20rpx;
-		/* margin-bottom: 100px; */
+		margin-top: 20px;
+		margin-bottom: 100px;
 		width: 80%;
 		min-height: 300px;
 		max-width: 750px;
