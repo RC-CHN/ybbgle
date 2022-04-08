@@ -58,12 +58,28 @@
       width="30%"
       :before-close="handleClose"
     >
-      <div></div>
+      <div class="uploadBox">
+        <div>
+          <div style="height: 20px"></div>
+          <el-input v-model="inputName" placeholder="站点名" />
+          <div style="height: 20px"></div>
+          <el-input v-model="inputUrl" placeholder="站点地址" />
+          <div style="height: 20px"></div>
+        </div>
+        <div class="fixP">
+          <div>
+            <img :src="uploadLogo" style="width:100px;height:100px"/>
+          </div>
+          <div>
+            <el-button type="primary">上传图标</el-button>
+          </div>
+        </div>
+      </div>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">Cancel</el-button>
+          <el-button @click="dialogVisible = false">取消</el-button>
           <el-button type="primary" @click="dialogVisible = false"
-            >Confirm</el-button
+            >确认</el-button
           >
         </span>
       </template>
@@ -94,6 +110,9 @@ export default {
       status: true,
       reloadFlag: false,
       dialogVisible: false,
+      uploadLogo: "http://m.rcfortress.site:7899/static/add.png",
+      inputName:"",
+      inputUrl:""
     };
   },
   mounted() {
@@ -168,6 +187,11 @@ page {
   background-repeat: no-repeat;
   background-position: bottom;
   height: 100%;
+}
+.uploadBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .long {
@@ -296,6 +320,9 @@ page {
   justify-content: flex-start;
   gap: 10rpx;
   /* box-shadow: 2px 5px 5px 5px rgba(0, 0, 0, 0.1); */
+}
+.fixP{
+  transform: translate(-60px,-20px);
 }
 </style>
 
