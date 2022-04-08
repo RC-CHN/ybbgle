@@ -42,6 +42,7 @@
     <div class="nav-panel">
       
       <urlItem v-for="content in sites" v-bind:content="content" v-bind:key="content.url"></urlItem>
+      <addSite></addSite>
       <!-- <div class="nav-panel-item" title="Bilibili" href="https://www.bilibili.com/" target="_blank">
 			        <img src="https://www.bilibili.com/favicon.ico" alt="Bilibili" height="16" width="16" class="nav-panel-item-img">
 			        <div class="nav-panel-item-txt">Bilibili</div>
@@ -55,12 +56,13 @@
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
 import urlItem from "@/components/urlItem.vue";
+import addSite from "@/components/addSite.vue"
 // import * as echarts from "echarts"
 import axios from "axios";
 export default {
   name: "HomeView",
   components: {
-    urlItem
+    urlItem,addSite
   },
   data() {
     return {
