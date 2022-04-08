@@ -54,7 +54,7 @@
     </div>
     <el-dialog
       v-model="dialogVisible"
-      title="Tips"
+      title="添加站点"
       width="30%"
       :before-close="handleClose"
     >
