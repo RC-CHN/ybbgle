@@ -7,19 +7,19 @@
         class="logo"
         v-if="status"
         @click="changeStatus"
-      >
+      />
       <div v-if="!status">
         <div>
           <img
             src="../../static/long.png"
             class="long"
             @click="changeStatus()"
-          >
+          />
         </div>
-        <div> 喔唷，崩溃啦！ </div>
-        <div @click="toUpload"> 显示 你妈 时出了些问题。 </div>
-        <div style="font-weight: 700"> 可能是你妈不存在 </div>
-        <div style="color: #007aff" @click="navigate"> 了解详情 </div>
+        <div>喔唷，崩溃啦！</div>
+        <div @click="toUpload">显示 你妈 时出了些问题。</div>
+        <div style="font-weight: 700">可能是你妈不存在</div>
+        <div style="color: #007aff" @click="navigate">了解详情</div>
       </div>
     </div>
     <div class="search-bar">
@@ -40,29 +40,51 @@
       <button class="search-bar-button" @click="searchBaidu">Baidu</button>
     </div>
     <div class="nav-panel">
-      
-      <urlItem v-for="content in sites" v-bind:content="content" v-bind:key="content.url"></urlItem>
-      <addSite></addSite>
+      <urlItem
+        v-for="content in sites"
+        v-bind:content="content"
+        v-bind:key="content.url"
+      ></urlItem>
+      <addSite @addPage="updateSite"></addSite>
       <!-- <div class="nav-panel-item" title="Bilibili" href="https://www.bilibili.com/" target="_blank">
 			        <img src="https://www.bilibili.com/favicon.ico" alt="Bilibili" height="16" width="16" class="nav-panel-item-img">
 			        <div class="nav-panel-item-txt">Bilibili</div>
 			    </div> -->
       <!-- <addPage></addPage> -->
     </div>
+    <el-dialog
+      v-model="dialogVisible"
+      title="Tips"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <div></div>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="dialogVisible = false"
+            >Confirm</el-button
+          >
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
+import { ElMessageBox } from "element-plus";
 import urlItem from "@/components/urlItem.vue";
-import addSite from "@/components/addSite.vue"
+import addSite from "@/components/addSite.vue";
 // import * as echarts from "echarts"
 import axios from "axios";
 export default {
   name: "HomeView",
   components: {
-    urlItem,addSite
+    urlItem,
+    addSite,
+    ElMessageBox,
   },
   data() {
     return {
@@ -71,6 +93,7 @@ export default {
       sites: null,
       status: true,
       reloadFlag: false,
+      dialogVisible: false,
     };
   },
   mounted() {
@@ -84,11 +107,11 @@ export default {
       _that.$data.sites = res.data;
       _that.$data.reloadFlag = true;
     });
-	document.addEventListener("keydown",function(e){
-		if(e.keyCode == 13){
-			_that.searchBing()
-		}
-	})
+    document.addEventListener("keydown", function (e) {
+      if (e.keyCode == 13) {
+        _that.searchBing();
+      }
+    });
     // uni.request({
     //   url: "http://m.rcfortress.site:7899/navi/getSiteList",
     //   method: "GET",
@@ -103,6 +126,10 @@ export default {
   methods: {
     changeStatus() {
       this.$data.status = !this.$data.status;
+    },
+    updateSite() {
+      console.log("弹出框体");
+      this.$data.dialogVisible = true;
     },
     // changeMode() {
     //   uni.redirectTo({
@@ -135,95 +162,94 @@ export default {
 };
 </script>
 <style>
-	page {
-		background-color: #ffffff;
-		background-image: url(../../static/bg.svg);
-		background-repeat: no-repeat;
-		background-position: bottom;
-		height: 100%;
-	}
+page {
+  background-color: #ffffff;
+  background-image: url(../../static/bg.svg);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: 100%;
+}
 
-	.long {
-		width: 100rpx;
-		height: 100rpx;
-	}
+.long {
+  width: 100rpx;
+  height: 100rpx;
+}
 
-	.buttonBox {
-		margin-top: 20rpx;
-		margin-bottom: 40rpx;
-	}
+.buttonBox {
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+}
 
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		/* font-family: 'Jetbrains Mono'; */
-	}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* font-family: 'Jetbrains Mono'; */
+}
 
-	.logo {
-		width: 280px;
-		height: 100px;
-		margin-top: 20px;
-	}
+.logo {
+  width: 280px;
+  height: 100px;
+  margin-top: 20px;
+}
 
-	.search-bar {
-		margin-top: 25px;
-		width: 600px;
-		height: 100px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: -50px;
+.search-bar {
+  margin-top: 25px;
+  width: 600px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -50px;
+}
 
-	}
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 
-	.bg {
-		position: fixed;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		z-index: -1;
-	}
+.search-bar-input {
+  width: 580px;
+  height: 25px;
+  padding: 9px 10px;
+  font-family: "Microsoft YaHei UI", arial, sans-serif;
+  font-size: 15px;
+  color: #555;
+  border: none;
+  background: #fff;
+  overflow: hidden;
+  outline: none;
+  vertical-align: middle;
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: 2px 5px 5px 2px rgba(0, 0, 0, 0.1);
+}
 
-	.search-bar-input {
-		width: 580px;
-		height: 25px;
-		padding: 9px 10px;
-		font-family: 'Microsoft YaHei UI', arial, sans-serif;
-		font-size: 15px;
-		color: #555;
-		border: none;
-		background: #fff;
-		overflow: hidden;
-		outline: none;
-		vertical-align: middle;
-		border-radius: 2px;
-		background-color: #FFFFFF;
-		box-shadow: 2px 5px 5px 2px rgba(0, 0, 0, 0.1);
-	}
+.search-bar-button {
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 105px;
+  height: 35px;
+  line-height: 35px;
+  overflow: hidden;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  border: none;
+  overflow: hidden;
+  vertical-align: middle;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: rgb(20, 162, 245);
+  display: inline-block;
 
-	.search-bar-button {
-		margin-top: 20px;
-		margin-left: 20px;
-		width: 105px;
-		height: 35px;
-		line-height: 35px;
-		overflow: hidden;
-		text-align: center;
-		font-size: 15px;
-		font-weight: bold;
-		color: rgb(255, 255, 255);
-		border: none;
-		overflow: hidden;
-		vertical-align: middle;
-		outline: none;
-		cursor: pointer;
-		border-radius: 5px;
-		background-color: rgb(20, 162, 245);
-		display: inline-block;
-
-		/* margin-top: 20px;
+  /* margin-top: 20px;
 		margin-left: 20px;
 		width: 105px;
 		height: 35px;
@@ -242,34 +268,34 @@ export default {
 		border-radius: 5px;
 		background-color: #FFFFFF;
 		display: inline-block; */
-	}
+}
 
-	.search-bar-button:hover {
-		background-color: rgb(30, 172, 245);
-		box-shadow: 0px 0px 3px rgba(242, 242, 243, 0.6);
-	}
+.search-bar-button:hover {
+  background-color: rgb(30, 172, 245);
+  box-shadow: 0px 0px 3px rgba(242, 242, 243, 0.6);
+}
 
-	.nav-panel {
-		backdrop-filter: blur(6px);
-		opacity: 0.6;
-		align-content: flex-start;
-		margin-top: 20px;
-		margin-bottom: 100px;
-		width: 80%;
-		min-height: 300px;
-		max-width: 750px;
-		margin-left: auto;
-		margin-right: auto;
-		padding-left: 30px;
-		padding-top: 10px;
-		/* background-color: #FFFFFF; */
-		border-radius: 10px;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: flex-start;
-		gap: 10rpx;
-		/* box-shadow: 2px 5px 5px 5px rgba(0, 0, 0, 0.1); */
-	}
+.nav-panel {
+  backdrop-filter: blur(6px);
+  opacity: 0.6;
+  align-content: flex-start;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  width: 80%;
+  min-height: 300px;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 30px;
+  padding-top: 10px;
+  /* background-color: #FFFFFF; */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10rpx;
+  /* box-shadow: 2px 5px 5px 5px rgba(0, 0, 0, 0.1); */
+}
 </style>
 

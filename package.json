@@ -12,7 +12,7 @@
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "echarts": "^5.3.2",
-    "element-plus": "^2.1.7",
+    "element-plus": "^2.1.8",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },
@@ -39,12 +39,11 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "no-mixed-spaces-and-tabs":0,
+      "no-mixed-spaces-and-tabs": 0,
       "no-unused-vars": 0,
       "no-unreachable": 0,
       "vue/no-unused-components": 0,
       "no-irregular-whitespace": 0
-
     }
   },
   "browserslist": [

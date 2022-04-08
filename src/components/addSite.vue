@@ -21,8 +21,7 @@ export default {
   },
   methods: {
     addPage() {
-      console.log("开始添加站点");
-      
+      this.$emit("addPage");
     },
   },
 };
