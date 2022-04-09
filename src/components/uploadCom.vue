@@ -30,14 +30,14 @@
     >
       
       <template #trigger>
-        <el-button type="primary">Click to upload</el-button>
+        <el-button type="primary">点击上传</el-button>
       </template>
-      <template #default>
+      <div>
         <img :src="showPic" style="height: 100px; width: 100px" />
-      </template>
-      <template #tip>
+      </div>
+      <!-- <template #tip>
         <div class="el-upload__tip">只允许jpg/png/ico/gif</div>
-      </template>
+      </template> -->
     </el-upload>
   </div>
 </template>

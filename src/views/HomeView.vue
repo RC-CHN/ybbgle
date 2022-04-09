@@ -335,7 +335,7 @@ page {
   /* box-shadow: 2px 5px 5px 5px rgba(0, 0, 0, 0.1); */
 }
 .fixP {
-  transform: translate(-60px, -20px);
+  transform: translate(-0px, -0px);
 }
 </style>
 
