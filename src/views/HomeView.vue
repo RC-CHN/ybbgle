@@ -44,6 +44,7 @@
         v-for="content in sites"
         v-bind:content="content"
         v-bind:key="content.url"
+        @delete="deleteSite"
       ></urlItem>
       <addSite @addPage="updateSite"></addSite>
       <!-- <div class="nav-panel-item" title="Bilibili" href="https://www.bilibili.com/" target="_blank">
@@ -83,6 +84,20 @@
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
           <el-button type="primary" @click="confirmUpload">确认</el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <el-dialog
+      v-model="deleteVis"
+      title="确认"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <span>确定要删除此项目吗</span>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="deleteVis = false">取消</el-button>
+          <el-button type="primary" @click="confirmDelete">确认</el-button>
         </span>
       </template>
     </el-dialog>
@@ -126,6 +141,8 @@ export default {
       uploadLogo: "",
       inputName: "",
       inputUrl: "",
+      deleteVis: false,
+      deleteTitle: "",
     };
   },
   mounted() {
@@ -158,9 +175,35 @@ export default {
     // });
   },
   methods: {
+    deleteSite(data) {
+      this.$data.deleteVis = true;
+      console.log("准备删除站点");
+      console.log(data);
+      this.$data.deleteTitle = data;
+    },
+    confirmDelete() {
+      let _that = this;
+      if (_that.$data.deleteTitle != "*") {
+        axios({
+          method: "delete",
+          url: "http://m.rcfortress.site:7899/navi/deleteSite",
+          data: {
+            title: _that.$data.deleteTitle,
+          },
+        }).then(function (res) {
+          console.log("已经删除站点");
+          console.log(res);
+          ElMessage("删除成功");
+          _that.getData();
+          setTimeout(function () {
+            _that.$data.deleteVis = false;
+          }, 1000);
+        });
+      }
+    },
     getData() {
       let _that = this;
-      
+
       axios({
         method: "get",
         url: "http://m.rcfortress.site:7899/navi/getSiteList",
@@ -228,7 +271,7 @@ export default {
           console.log("更新上传成功");
           console.log(res);
           ElMessage("更新上传成功");
-          _that.getData()
+          _that.getData();
           setTimeout(function () {
             _that.$data.dialogVisible = false;
           }, 1000);
@@ -399,6 +442,7 @@ page {
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 10rpx;
+  transform: translateX(15px);
   /* box-shadow: 2px 5px 5px 5px rgba(0, 0, 0, 0.1); */
 }
 .fixP {
