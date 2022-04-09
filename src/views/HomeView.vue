@@ -130,15 +130,17 @@ export default {
   },
   mounted() {
     let _that = this;
-    axios({
-      method: "get",
-      url: "http://m.rcfortress.site:7899/navi/getSiteList",
-    }).then(function (res) {
-      console.log("已经获取网站列表");
-      console.log(res.data);
-      _that.$data.sites = res.data;
-      _that.$data.reloadFlag = true;
-    });
+    _that.$data.reloadFlag = false;
+    _that.getData();
+    // axios({
+    //   method: "get",
+    //   url: "http://m.rcfortress.site:7899/navi/getSiteList",
+    // }).then(function (res) {
+    //   console.log("已经获取网站列表");
+    //   console.log(res.data);
+    //   _that.$data.sites = res.data;
+    //   _that.$data.reloadFlag = true;
+    // });
     document.addEventListener("keydown", function (e) {
       if (e.keyCode == 13) {
         _that.searchBing();
@@ -156,6 +158,19 @@ export default {
     // });
   },
   methods: {
+    getData() {
+      let _that = this;
+      
+      axios({
+        method: "get",
+        url: "http://m.rcfortress.site:7899/navi/getSiteList",
+      }).then(function (res) {
+        console.log("已经获取网站列表");
+        console.log(res.data);
+        _that.$data.sites = res.data;
+        _that.$data.reloadFlag = true;
+      });
+    },
     handlePic(data) {
       console.log("接收到icon");
       console.log(data);
@@ -213,6 +228,7 @@ export default {
           console.log("更新上传成功");
           console.log(res);
           ElMessage("更新上传成功");
+          _that.getData()
           setTimeout(function () {
             _that.$data.dialogVisible = false;
           }, 1000);
