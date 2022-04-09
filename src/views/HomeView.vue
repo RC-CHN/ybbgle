@@ -101,6 +101,11 @@
         </span>
       </template>
     </el-dialog>
+    <div style="text-align: center;color: #989898;margin-top: 30px;">
+			<div style="padding-top: 10px;">Ybbgle Remastered</div>
+			<div style="padding-top: 10px;">Copyright © 2022 PRC, HDU, Inistitude Of Automation.</div>
+			<div style="padding-top: 10px;">All Rights Reserved.</div>
+		</div>
   </div>
 </template>
 
@@ -197,7 +202,7 @@ export default {
           _that.getData();
           setTimeout(function () {
             _that.$data.deleteVis = false;
-          }, 1000);
+          }, 300);
         });
       }
     },
@@ -274,7 +279,7 @@ export default {
           _that.getData();
           setTimeout(function () {
             _that.$data.dialogVisible = false;
-          }, 1000);
+          }, 300);
         });
         // uni.request({
         //   url: "http://m.rcfortress.site:7899/navi/updateSiteList",
