@@ -57,19 +57,19 @@
       title="添加站点"
       width="40%"
       :before-close="handleClose"
-      style="min-width:400px"
+      style="min-width: 400px"
     >
       <div class="uploadBox">
-        <div style="margin:40px">
+        <div style="margin: 40px">
           <div style="height: 20px"></div>
           <el-input v-model="inputName" placeholder="站点名" />
           <div style="height: 20px"></div>
           <el-input v-model="inputUrl" placeholder="站点地址" />
           <div style="height: 20px"></div>
         </div>
-        <div style="margin:40px">
+        <div style="margin: 40px">
           <div class="fixP">
-            <upload-com> </upload-com>
+            <upload-com @uploadComplete="handlePic"> </upload-com>
           </div>
           <!-- <div>
             <img :src="uploadLogo" style="width: 100px; height: 100px" />
@@ -82,9 +82,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="dialogVisible = false"
-            >确认</el-button
-          >
+          <el-button type="primary" @click="confirmUpload">确认</el-button>
         </span>
       </template>
     </el-dialog>
@@ -94,7 +92,12 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
-import { ElMessageBox, UploadProps, UploadUserFile } from "element-plus";
+import {
+  ElMessageBox,
+  UploadProps,
+  UploadUserFile,
+  ElMessage,
+} from "element-plus";
 
 import urlItem from "@/components/urlItem.vue";
 import addSite from "@/components/addSite.vue";
@@ -104,6 +107,7 @@ import axios from "axios";
 export default {
   name: "HomeView",
   components: {
+    ElMessage,
     urlItem,
     addSite,
     ElMessageBox,
@@ -119,8 +123,7 @@ export default {
       status: true,
       reloadFlag: false,
       dialogVisible: false,
-      uploadLogo: "http://m.rcfortress.site:7899/static/add.png",
-      tempLogo: "http://m.rcfortress.site:7899/static/add.png",
+      uploadLogo: "",
       inputName: "",
       inputUrl: "",
     };
@@ -153,15 +156,17 @@ export default {
     // });
   },
   methods: {
+    handlePic(data) {
+      console.log("接收到icon");
+      console.log(data);
+      this.$data.uploadLogo = data;
+    },
     changeStatus() {
       this.$data.status = !this.$data.status;
     },
     updateSite() {
       console.log("弹出框体");
       this.$data.dialogVisible = true;
-    },
-    uploadPic() {
-      console.log("上传图片");
     },
     // changeMode() {
     //   uni.redirectTo({
@@ -189,6 +194,52 @@ export default {
     searchBaidu() {
       let searchUrl = "https://www.baidu.com/s?wd=" + this.$data.searchText;
       window.open(searchUrl);
+    },
+    confirmUpload() {
+      console.log(this.$data.inputName);
+      console.log(this.$data.inputUrl);
+      if (this.$data.inputName != "" && this.$data.inputUrl) {
+        console.log("内容非空,允许上传");
+        let _that = this;
+        axios({
+          method: "post",
+          url: "http://m.rcfortress.site:7899/navi/updateSiteList",
+          data: {
+            url: _that.$data.inputUrl,
+            title: _that.$data.inputName,
+            icon: _that.$data.uploadLogo,
+          },
+        }).then(function (res) {
+          console.log("更新上传成功");
+          console.log(res);
+          ElMessage("更新上传成功");
+          setTimeout(function () {
+            _that.$data.dialogVisible = false;
+          }, 1000);
+        });
+        // uni.request({
+        //   url: "http://m.rcfortress.site:7899/navi/updateSiteList",
+        //   method: "POST",
+        //   data: {
+        //     url: this.$data.websiteURL,
+        //     title: this.$data.websiteTitle,
+        //     icon: this.$data.picPath,
+        //   },
+        //   success(res) {
+        //     console.log(res);
+        //     uni.showModal({
+        //       title: "提示",
+        //       content: "记录已经上传,请回首页刷新查看",
+        //       showCancel: false,
+        //       success: function (res) {
+        //         if (res.confirm) {
+        //           console.log("UserConfirm");
+        //         }
+        //       },
+        //     });
+        //   },
+        // });
+      }
     },
   },
 };

@@ -70,6 +70,7 @@ export default {
         "http://m.rcfortress.site:7899" + this.$data.fileList[0].response;
       console.log(this.$data.remoteAddr);
       this.$data.showPic = this.$data.remoteAddr
+      this.$emit("uploadComplete",this.$data.remoteAddr)
     },
     beforeUpload() {
       console.log("准备上传");
