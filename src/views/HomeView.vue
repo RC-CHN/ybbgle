@@ -55,24 +55,28 @@
     <el-dialog
       v-model="dialogVisible"
       title="添加站点"
-      width="30%"
+      width="40%"
       :before-close="handleClose"
+      style="min-width:400px"
     >
       <div class="uploadBox">
-        <div>
+        <div style="margin:40px">
           <div style="height: 20px"></div>
           <el-input v-model="inputName" placeholder="站点名" />
           <div style="height: 20px"></div>
           <el-input v-model="inputUrl" placeholder="站点地址" />
           <div style="height: 20px"></div>
         </div>
-        <div class="fixP">
-          <div>
-            <img :src="uploadLogo" style="width:100px;height:100px"/>
+        <div style="margin:40px">
+          <div class="fixP">
+            <upload-com> </upload-com>
+          </div>
+          <!-- <div>
+            <img :src="uploadLogo" style="width: 100px; height: 100px" />
           </div>
           <div>
-            <el-button type="primary">上传图标</el-button>
-          </div>
+            <el-button type="primary" @click="uploadPic">上传图标</el-button>
+          </div> -->
         </div>
       </div>
       <template #footer>
@@ -90,9 +94,11 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
-import { ElMessageBox } from "element-plus";
+import { ElMessageBox, UploadProps, UploadUserFile } from "element-plus";
+
 import urlItem from "@/components/urlItem.vue";
 import addSite from "@/components/addSite.vue";
+import uploadCom from "@/components/uploadCom.vue";
 // import * as echarts from "echarts"
 import axios from "axios";
 export default {
@@ -101,6 +107,9 @@ export default {
     urlItem,
     addSite,
     ElMessageBox,
+    UploadProps,
+    UploadUserFile,
+    uploadCom,
   },
   data() {
     return {
@@ -111,8 +120,9 @@ export default {
       reloadFlag: false,
       dialogVisible: false,
       uploadLogo: "http://m.rcfortress.site:7899/static/add.png",
-      inputName:"",
-      inputUrl:""
+      tempLogo: "http://m.rcfortress.site:7899/static/add.png",
+      inputName: "",
+      inputUrl: "",
     };
   },
   mounted() {
@@ -149,6 +159,9 @@ export default {
     updateSite() {
       console.log("弹出框体");
       this.$data.dialogVisible = true;
+    },
+    uploadPic() {
+      console.log("上传图片");
     },
     // changeMode() {
     //   uni.redirectTo({
@@ -191,7 +204,7 @@ page {
 .uploadBox {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .long {
@@ -321,8 +334,8 @@ page {
   gap: 10rpx;
   /* box-shadow: 2px 5px 5px 5px rgba(0, 0, 0, 0.1); */
 }
-.fixP{
-  transform: translate(-60px,-20px);
+.fixP {
+  transform: translate(-60px, -20px);
 }
 </style>
 
